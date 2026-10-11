@@ -14,39 +14,36 @@ def display_stats():
     print("Losses:" + str(lossTracker))
     print("Ties:" + str(tieTracker))
 
-def play_again():
-    playAgain = input("Do you want to play again? (y/n): ")
-    if playAgain.lower() == "y":
-        play_game()
-    else:
-        print("Thanks for playing!")
-        display_stats()
-
 def play_game():
     gameNum = random.randint(0,2)
     global lossTracker
     global winTracker
     global tieTracker
-    userInput = input("enter rock(r), paper(p), or scissors(s):")
+    userInput = input("enter rock(r), paper(p), or scissors(s) (to quit type (q)):")
     if gameNum == 0:
         gameRoll = "r"
     elif gameNum == 1:
         gameRoll = "p"
     elif gameNum == 2:
         gameRoll = "s"
-    if gameNum == userInput:
+    if gameRoll == userInput:
         tieTracker += 1
         print("It's a tie!")
-        play_again()
+        display_stats()
+        play_game()
     elif (userInput == "r" and gameRoll == "s") or (userInput == "p" and gameRoll == "r") or (userInput == "s" and gameRoll == "p"):
         winTracker += 1
         print("You win!")
         display_stats()
-        play_again()
+        play_game()
+    elif (userInput == "q"):
+        print("Thanks for playing!")
+        display_stats()
     else:
         lossTracker += 1
         print("You lose!")
         display_stats()
-        play_again()
+        play_game()
 
 play_game()
+#yay it works! 
